@@ -1,6 +1,6 @@
 {
   "name": "github-actions-test",
-  "version": "0.0.2",
+  "version": "0.0.2-beta",
   "dependencies": {
     "express": "^4.18.1"
   }
