@@ -19,7 +19,17 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: ⌛️ Build
         run: npm ci
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
       - name: "Auto Version Bump"
-        uses: "rimonhanna/gh-action-bump-version@master"
+        uses: "phips28/gh-action-bump-version@master"
         with:
           tag-prefix: "relrel"
+        env:
+          GITHUB_USER: ${{ github.actor }}
+          GITHUB_EMAIL: sudiptosarkar@visioplanet.org
