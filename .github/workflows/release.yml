@@ -19,7 +19,7 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: ⌛️ Build
         run: npm ci
-      - name:  'Auto Version Bump'
-        uses:  'rimonhanna/gh-action-bump-version@master'
+      - name: "Auto Version Bump"
+        uses: "rimonhanna/gh-action-bump-version@master"
         with:
-          tag-prefix:  'relrel'
+          tag-prefix: "relrel"
