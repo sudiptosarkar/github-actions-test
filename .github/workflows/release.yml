@@ -1,0 +1,30 @@
+name: "🚀 Publish"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: 🚀 Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 checkout
+        uses: actions/checkout@v3
+      - name: 🟢 node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.9.0
+          registry-url: https://registry.npmjs.org
+      - name: ⌛️ Build
+        run: npm ci
+      - name: 🚀 Version Bump
+        uses: bcomnes/npm-bump@v2.0.2
+        with:
+          git_email: sudiptosarkar@visioplanet.org
+          git_username: ${{ github.actor }}
+          newversion: ${{ github.event.inputs.newversion }}
+          push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
+          github_token: ${{ secrets.GITHUB_TOKEN }} # built in actions token.  Passed tp gh-release if in use.
+          npm_token: ${{ secrets.NPM_TOKEN }} # user set secret token generated at npm

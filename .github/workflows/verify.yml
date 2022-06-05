@@ -3,9 +3,16 @@ on:
     branches:
       - main
 jobs:
-  test:
+  release:
+    name: 🚀 Publish
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Test
-        run: echo "done"
+      - name: 📚 checkout
+        uses: actions/checkout@v3
+      - name: 🟢 node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.9.0
+          registry-url: https://registry.npmjs.org
+      - name: ⌛️ Build
+        run: npm ci
